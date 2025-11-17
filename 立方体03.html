@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#prv {
+				width: 600px;
+				height: 600px;
+				transform-style: preserve-3d;
+				/* background: rgba(0,0,0,0.5); */
+				perspective: 1000px;
+				transform: translate(100px, 100px);
+			}
+
+			#clube {
+				width: 600px;
+				height: 600px;
+				transform-style: preserve-3d;
+				/* background: rgba(0,0,0,0.5); */
+				perspective: auto;
+				transition: all 5s linear;
+				transform-origin: 300px 0;
+				animation: am01 15s linear infinite;
+				position: relative;
+			}
+			.circle {
+				width: 50px;
+				height: 50px;
+				background: rgba(255, 0, 0, 0.5);
+				position: absolute;
+				left: 275px;
+				top: 275px;
+				transform-origin: 25px 25px;
+				border-radius: 100%;
+				background: url(aa.jpg) 0 0/50px 50px;
+			}
+
+			@keyframes am01 {
+				0% {
+					transform: rotateX(0) rotateY(0) rotateZ(0);
+				}
+
+				100% {
+					transform: rotateX(0) rotateY(360deg) rotateZ(0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="prv">
+			<div id="clube"></div>
+		</div>
+		<script type="text/javascript">
+			var clube = document.querySelector('#clube')
+			for (let i = 0; i < 24; i++) {
+				let ele = document.createElement('div')
+				ele.id = "c1-" + i
+				ele.className = 'circle circle1'
+				ele.style.transform = 'rotatey(' + (i * 360 / 24) + 'deg) translatez(300px) translatey(0px)'
+				clube.appendChild(ele)
+			}
+			for (let i = 0; i < 24; i++) {
+				let ele = document.createElement('div')
+				ele.id = "c1-" + i
+				ele.className = 'circle circle1'
+				if(i<12){
+				ele.style.transform = 'rotatex(' + (i * 360 / 24) + 'deg) translatey(300px) rotatex(90deg) rotatez(180deg) translatez(0px)'
+					
+				}else{
+				ele.style.transform = 'rotatex(' + (i * 360 / 24) + 'deg) translatey(300px) rotatex(90deg) translatez(0px)'
+				}
+				clube.appendChild(ele)
+			}
+			for (let i = 0; i < 24; i++) {
+				let ele = document.createElement('div')
+				ele.id = "c1-" + i
+				ele.className = 'circle circle1'
+				if(i<12){
+				ele.style.transform = 'rotatez(' + (i * 360 / 24) + 'deg) translatex(300px) rotatey(90deg) rotatez(-180deg) translatez(0px)'
+					
+				}else{
+				ele.style.transform = 'rotatez(' + (i * 360 / 24) + 'deg) translatex(300px) rotatey(90deg) translatez(0px)'
+				}
+				clube.appendChild(ele)
+			}
+
+		</script>
+	</body>
+</html>

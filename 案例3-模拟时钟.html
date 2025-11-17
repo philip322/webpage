@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#clock{
+				width: 600px;
+				height: 600px;
+				position: relative;
+				border-radius: 100%;
+				border: 10px solid #000;
+			}
+			.mk{
+				width: 10px;
+				height: 540px;
+				border-top: 30px solid #333;
+				border-bottom: 30px solid #333;
+				position: absolute;
+				left:295px;
+				top: 0;
+			}
+			.mk:before,.mk:after{
+				content: "";
+				width: 10px;
+				height: 560px;
+				border-top: 20px solid #333;
+				border-bottom: 20px solid #333;
+				position: absolute;
+				left:0;
+				top: -30px;
+				transform: rotate(30deg);
+			}
+			.mk:after{
+				transform: rotate(60deg);
+			}
+			#mk2{
+				transform: rotate(90deg);
+			}
+			#p_ss{
+				position: absolute;
+				width: 10px;
+				height: 300px;
+				background: rgba(255,0,0,0.8);
+				left: 295px;
+				top: 50px;
+				transform-origin: 5px 250px;
+				transform: rotate(30deg);
+				animation: am01 30s linear infinite;
+			}
+			@keyframes am01{
+				from{transform: rotate(0);}
+				to{transform: rotate(360deg);}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="clock">
+			<div id="mk1" class="mk"></div>
+			<div id="mk2" class="mk"></div>
+			<div id="p_hh"></div>
+			<div id="p_mm"></div>
+			<div id="p_ss"></div>
+		</div>
+	</body>
+</html>

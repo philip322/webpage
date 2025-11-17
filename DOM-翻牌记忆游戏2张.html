@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM对象-记忆翻牌游戏</title>
+		<style type="text/css">
+			#game {
+				width: 800px;
+			}
+
+			.gdiv {
+				width: 184px;
+				height: 255px;
+				float: left;
+				margin: 5px;
+				overflow: hidden;
+				transition: all 0.5s ease;
+			}
+
+			.gdiv>img {
+				transition: all 0.5s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button" onclick="xipai()">洗牌</button>
+		<button type="button" onclick="start()">开始</button>
+		<div id="game"></div>
+		<script type="text/javascript">
+			//声明变量
+			var game, game_block = [],
+				poker_arr = [],
+				game_block_poker = []
+			var g_opened, g_start = 0,
+				g_num = 0
+			var time1,time2
+			//初始化:页面布局,设置游戏块
+			g_init()
+
+			function g_init() {
+				game = document.getElementById("game")
+				for (let i = 0; i < 8; i++) {
+					let gdiv = document.createElement("div")
+					gdiv.className = "gdiv"
+					gdiv.style.background = "url(img/02/1.jpg)"
+					let gimg = document.createElement("img")
+					gimg.src = "img/02/55.jpg"
+					gimg.style.transform = "translate(184px)"
+					gimg.setAttribute("onclick", "g_open(this)")
+					gdiv.appendChild(gimg)
+					game.appendChild(gdiv)
+					game_block.push(gdiv)
+				}
+				for (var i = 1; i <= 52; i++) {
+					poker_arr.push("url(img/02/" + i + ".jpg)")
+				}
+				xipai()
+			}
+
+			function xipai() {
+				//每次洗牌进行游戏数据重置
+				g_start = 0,g_num = 0;
+				//获取4个随机牌面
+				game_block_poker = poker_arr.sort(() => Math.random() - 0.5).slice(0, 4)
+				//组成4对8张并进行随机洗牌
+				game_block_poker = game_block_poker.concat(game_block_poker)
+					.sort(() => Math.random() - 0.5)
+				//将8张牌面放置到游戏块中
+				game_block_poker.forEach((poker, i) => {
+					game_block[i].style.background = poker
+					game_block[i].childNodes[0].setAttribute("onclick", "g_open(this)")
+					game_block[i].childNodes[0].style.transform = "translate(184px)"
+				})
+			}
+
+			function start() {
+				if (g_start == 0) {
+					g_start = 1	//游戏开始后,不允许再点击开始按钮
+					for (let i = 0; i < 8; i++) { //游戏开始,合牌
+						game_block[i].querySelector('img').style.transform = "translate(0)"
+					}
+				}
+			}
+
+			function g_open(e) { //开牌动作函数
+				let g_block = e.parentNode
+				e.style.transform = "translate(184px)"
+				e.removeAttribute("onclick")
+				if(g_num==0)time1=new Date()
+				if (g_num%2==0) {
+					g_num++
+					g_opened = g_block
+				} else {
+					if (g_opened.isEqualNode(g_block)) {
+						g_num++
+						if (g_num == 8) {
+							time2=new Date();
+							setTimeout(() => {
+								alert("恭喜完成！\n耗时："+(time2-time1)/1000+"秒");
+								xipai()
+								}, 500)
+						}
+					} else {
+						setTimeout(() => {
+							e.style.transform = "translate(0px)";
+							e.setAttribute("onclick", "g_open(this)")
+						}, 500)
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

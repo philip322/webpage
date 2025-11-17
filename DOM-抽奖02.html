@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#frame {
+				width: 1200px;
+				height: 722px;
+				background: #f66;
+			}
+
+			#btn {
+				width: 160px;
+				height: 80px;
+				font-size: 50px;
+				transform: translate(520px, 100px);
+			}
+
+			#prizes {
+				width: 1000px;
+				height: 500px;
+				/* border: 1px solid #fff; */
+				transform: translate(100px, 120px);
+				display: flex;
+			}
+
+			.prize {
+				flex: 1;
+				background: rgba(255, 255, 255, 0.5);
+				margin: 5px;
+				border-radius: 5px;
+			}
+
+			#res {
+				width: 800px;
+				height: 200px;
+				background: rgba(0, 0, 0, 0.5);
+				transform: translate(200px, -300px);
+				font-size: 60px;
+				color: #fff;
+				text-align: center;
+				line-height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="frame">
+			<button type="button" id="btn" onclick="start(this)">开始</button>
+			<div id="prizes">
+				<div id="prize1" class="prize">
+					<h1>三等奖</h1>
+					<ol></ol>
+				</div>
+				<div id="prize2" class="prize">
+					<h1> 二等奖</h1>
+					<ol></ol>
+				</div>
+				<div id="prize3" class="prize">
+					<h1>一等奖</h1>
+					<ol></ol>
+				</div>
+			</div>
+			<div id="res"></div>
+		</div>
+		<script type="text/javascript">
+			var stu_str =
+				"020102170101,陈艳豪;020102170102,陈吉梅;020102170103,方涛佳;020102170104,郭强芝;020102170105,郭一林;020102170107,胡建帅;020102170108,胡鑫瑞;020102170109,华圣祥;020102170110,冀卫辉;020102170111,金梦龙;020102170112,李新飞;020102170113,李玉泰;020102170114,李淳林;020102170115,李怡琦;020102170116,李秋辉;020102170117,李辉;020102170118,刘亚强;020102170120,刘宇涛;020102170122,刘瑞宇;020102170123,马书航;020102170124,闵赛远;020102170125,牛晓宁;020102170126,彭昊;020102170127,彭亚澎;020102170128,齐海楠;020102170129,任耀豪;020102170130,孙雅沪;020102170131,孙嘉;020102170132,唐雪宇;020102170133,汪大文;020102170134,王哲霞;020102170135,王留;020102170136,王梓洋;020102170137,王志霞;020102170138,王浩涛;020102170139,王澳元;020102170140,王庆新;020102170141,王书;020102170142,王美文;020102170143,王文东;020102170144,魏庆赛;020102170146,徐慧波;020102170147,薛康航;020102170148,杨兴;020102170149,杨庆婷;020102170151,张臣旗;020102170152,张军情;020102170153,张希鹏;020102170154,张博晖;020102170155,张英圆;020102170156,张志山;020102170157,赵宏晓;020102170158,周峰;020102170159,朱硕铭;020102170160,侯坤名;020102170161,李丽伟;020102170162,崔锦"
+			var stu_arr = stu_str.split(";")
+			var prize_arr = [10,5,3]
+			var pindex=0
+
+			function start(e) {
+				if (e.innerHTML == "开始") { //点击开始
+					e.innerHTML = "确定"
+					timer = setInterval(function() {
+						var rnd = parseInt(Math.random() * stu_arr.length)
+						stu = stu_arr[rnd].split(",")
+						res.innerHTML = stu[1] + "<br>" + stu[0]
+					}, 100)
+				} else { //点击确定
+					e.innerHTML = "开始"
+					clearInterval(timer)
+					
+					var pol=document.querySelectorAll(".prize ol")[pindex]
+					var pli=document.createElement("li")
+					pli.innerHTML=stu
+					
+					pol.appendChild(pli)
+					
+					prize_arr[pindex]--
+					if(prize_arr[pindex]==0)pindex++
+					if(pindex>2){
+						res.style.display="none"
+						btn.removeAttribute("onclick")
+						setTimeout(function(){alert("完成抽奖")},100)
+						
+					}
+					
+				}
+			}
+		</script>
+	</body>
+</html>

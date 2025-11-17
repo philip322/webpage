@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="GB2312">
+		<title>排序算法集合</title>
+	</head>
+	<body>
+<script type="text/javascript">
+	var arr=new Array(9999).fill(0).map((n,i)=>i+1).sort(()=>Math.random()-0.5)
+	
+//++++冒泡排序++++++++++++++++++++		
+function bubbleSort(arr) {
+    var len = arr.length;
+    for (var i = 0; i < len; i++) {
+        for (var j = 0; j < len - 1 - i; j++) {
+            if (arr[j] > arr[j+1]) {        //相邻元素两两对比
+                var temp = arr[j+1];        //元素交换
+                arr[j+1] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+//++++冒泡排序(改进)+++++++++++
+function bubbleSort2(arr) {
+    var i = arr.length-1;  //初始时,最后位置保持不变
+    while ( i> 0) {
+        var pos= 0; //每趟开始时,无记录交换
+        for (var j= 0; j< i; j++)
+            if (arr[j]> arr[j+1]) {
+                pos= j; //记录交换的位置
+                var tmp = arr[j]; arr[j]=arr[j+1];arr[j+1]=tmp;
+            }
+        i= pos; //为下一趟排序作准备
+     }
+     return arr;
+}
+//======选择排序==================
+function selectionSort(arr) {
+    var len = arr.length;
+    var minIndex, temp;
+    for (var i = 0; i < len - 1; i++) {
+        minIndex = i;
+        for (var j = i + 1; j < len; j++) {
+            if (arr[j] < arr[minIndex]) {     //寻找最小的数
+                minIndex = j;                 //将最小数的索引保存
+            }
+        }
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+    return arr;
+}
+//====插入排序==============
+function insertionSort(arr) {
+    for (var i = 1; i < arr.length; i++) {
+        var key = arr[i];
+        var j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+    return arr;
+}
+//=====插入排序(二分法)===================
+function binaryInsertionSort(arr) {
+    for (var i = 1; i < arr.length; i++) {
+        var key = arr[i], left = 0, right = i - 1;
+        while (left <= right) {
+            var middle = parseInt((left + right) / 2);
+            if (key < arr[middle]) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+        for (var j = i - 1; j >= left; j--) {
+            arr[j + 1] = arr[j];
+        }
+        arr[left] = key;
+    }
+    return arr;
+}
+//--------------------------------------------------------
+var sort={
+	"quickSort":{title:"快速排序",fun:
+		function quickSort(arr,left,right){
+		    if (left < right) {
+		        var x = arr[right], i = left - 1, temp;
+		        for (var j = left; j <= right; j++) {
+		            if (arr[j] <= x) {
+		                i++;
+		                temp = arr[i];
+		                arr[i] = arr[j];
+		                arr[j] = temp;
+		            }
+		        }
+		        quickSort(arr, left, i - 1);
+		        quickSort(arr, i + 1, right);
+		    }
+		    return arr;
+	   }//function.
+	},
+	"shellSort":{title:"希尔排序",fun:
+	function shellSort(arr) {
+	    var len = arr.length,
+	        temp,
+	        gap = 1;
+	    while(gap < len/2) {          //动态定义间隔序列
+	        gap =gap*2+1;
+	    }
+	    for (gap; gap > 0; gap = Math.floor(gap/2)) {
+	        for (var i = gap; i < len; i++) {
+	            temp = arr[i];
+	            for (var j = i-gap; j >= 0 && arr[j] > temp; j-=gap) {
+	                arr[j+gap] = arr[j];
+	            }
+	            arr[j+gap] = temp;
+	        }
+	    }
+	    return arr;
+	}
+	},
+
+}
+//-------------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	a.sort((a,b)=>b-a)
+var time2=new Date();
+document.write("内置sort排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-------------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	bubbleSort(a);
+var time2=new Date();
+document.write("冒泡排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	selectionSort(a);
+var time2=new Date();
+document.write("选择排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	insertionSort(a);
+var time2=new Date();
+document.write("插入排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	binaryInsertionSort(a);
+var time2=new Date();
+document.write("插入排序(二分法)-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	binaryInsertionSort(a);
+var time2=new Date();
+document.write("二分法排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	sort["shellSort"].fun(a);
+var time2=new Date();
+document.write("希尔排序-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+var time1=new Date();
+	var a=arr.slice(0);
+	sort["quickSort"].fun(a,0,a.length-1);
+var time2=new Date();
+document.write(sort["quickSort"].title+"-耗时: "+(time2-time1)+" 毫秒.<br>");
+//-----------------------------------------------------
+document.write(a)
+
+</script>
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>图片轮播</title>
+  <style type="text/css">
+	#frames {
+		width: 300px;
+		height: 240px;
+		overflow: hidden;
+	}
+	#photos {
+		position: relative;
+		width: 1500px;
+		height: 240px;
+	}
+	#photos img {
+		width: 300px;
+		height: 240px;
+		float: left;
+		border-radius: 10px;
+		position:absolute;left:300px;
+	}
+	#lab {
+		clear: both;
+		width: 100%;
+		position: relative;
+		top: -240px;
+	}
+	#lab span {
+		display: inline-block;
+		float: left;
+		text-align: center;
+		width: 200px;
+		border-radius: 10px;
+		margin: 10px 50px;
+		background: rgba(100,100,100,0.8);
+		color: #fff;
+	}
+	#photos #img1 {
+		animation: photo-v 20s ease-out infinite ;
+	}
+	#photos #img2 {
+		animation: photo-v2 20s ease-out infinite ;
+	}
+	#photos #img3 {
+		animation: photo-v2 20s ease-out 5s infinite ;
+	}
+	#photos #img4 {
+		animation: photo-v2 20s ease-out 10s infinite ;
+	}
+	@keyframes photo-v{
+			0%,15% {left: 0px;opacity:1}
+			25%{left:-300px;opacity:1}
+			41%{left:-300px;opacity:0}
+			50%{left:300px;opacity:0}
+			90%{left:300px;opacity:1}
+			100%{left:0px;opacity:1}
+	}
+	@keyframes photo-v2{
+			0%,15% {left: 300px;opacity:1}
+			25%,40% {left:0px;opacity:1}
+			50%{left:-300px;opacity:1}
+			51%{left:-300px;opacity:0;}
+			100%{left:300px;opacity:0;}
+	}
+	@keyframes photo-v3{
+			0%,40% {left: 300px;opacity:1}
+			50%,65% {left:0px;opacity:1}
+			75%{left:-300px;opacity:1}
+			76%{left:-300px;opacity:0;}
+			100%{left:300px;opacity:0;}
+	}
+	@keyframes photo-v4{
+			0%,65% {left: 300px;opacity:1}
+			75%,90% {left:0px;opacity:1}
+			100%{left:-300px;opacity:1}
+	}
+	@keyframes photo-view1{
+			0%,20% {left: 0px;}
+			25%,40% {left: -300px;}
+			45%,60% {left: -600px;}
+			65%,80% {left: -900px;}
+			85%,100% {left: -1200px;}
+	}
+  </style>
+ </head>
+ <body>
+ <div id="frames">	
+	   <div id="photos">	
+		  <img id="img1" src="images/0/1.jpg" >
+		  <img id="img2" src="images/0/2.jpg" >
+		  <img id="img3" src="images/0/3.jpg" >
+		  <img id="img4" src="images/0/4.jpg" >
+		  <img src="images/0/5.jpg" >
+		  <div id="lab">	
+			  <span>11111</span>
+			  <span>22222</span>
+			  <span>33333</span>
+			  <span>44444</span>
+			  <span>55555</span>
+		  </div>
+	  </div>
+</div>
+ </body>
+</html>

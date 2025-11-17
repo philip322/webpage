@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>图片轮播</title>
+  <style type="text/css">
+	  #head{height:100px;}
+	  #photo{margin:0 auto;width:300px;}
+		#frames{
+			width:300px;
+			height:240px;
+			list-style-type:none;
+			padding:0;
+		}
+		#frames li{
+			display:inline-block;
+			width:300px;
+			position:absolute;
+			transform:scalex(0);
+		}
+		#frames li:first-child{width:300px;}
+		#frames li img{
+			width:300px;
+			height:240px;
+			border-radius:10px;
+		}
+		#frames li span{
+			display:inline-block;
+			position:relative;
+			top:-240px;
+			width:200px;
+			background:rgba(100,100,100,.6);
+			text-align:center;
+			border-radius:10px;
+			margin:10px 50px;
+			color:#fff;
+		}
+		#frames li:first-child{animation:photo-v2 25s ease-out -5s infinite ;}
+		#frames li:nth-child(2){animation:photo-v2 25s ease-out infinite ;}
+		#frames li:nth-child(3){animation:photo-v2 25s ease-out 5s infinite ;}
+		#frames li:nth-child(4){animation:photo-v2 25s ease-out 10s infinite ;}
+		#frames li:nth-child(5){animation:photo-v2 25s ease-out 15s infinite ;}
+		@keyframes photo-v{
+			0%,15% {transform-origin:0 0;transform:scalex(1);}
+			20%{transform-origin:0 0;transform:scalex(0);}
+			21%,95%{transform-origin:300px 0;transform:scalex(0);}
+			100%{transform-origin:300px 0;transform:scalex(1);}
+			}
+		@keyframes photo-v2{
+			0%,15% {transform-origin:300px 0;transform:scalex(0);}
+			20%,35% {transform-origin:300px 0;transform:scalex(1);}
+			35% {transform-origin:0 0;transform:scalex(1);}
+			40% {transform-origin:0 0;transform:scalex(0);}
+			100%{transform-origin:300px 0;transform:scalex(0);}
+			}
+  </style>
+ </head>
+ <body>
+ <div id="head" class="">	
+	网站标题
+ </div>
+ <div id="photo">	
+	   <ul id="frames">
+		<li>
+			<img src="images/0/1.jpg" >
+			<span>11111</span>
+		</li>
+		<li>
+			<img src="images/0/2.jpg" >
+			<span>22222</span>
+		</li>
+		<li>
+			<img src="images/0/3.jpg" >
+			<span>33333</span>
+		</li>
+		<li>
+			<img src="images/0/4.jpg" >
+			<span>44444</span>
+		</li>
+		<li>
+			<img src="images/0/5.jpg" >
+			<span>55555</span>
+		</li>
+	   </ul>
+		  
+</div>
+ </body>
+</html>

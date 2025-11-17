@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>a1.1-实现同心圆的几种方式</title>
+  <style type="text/css">
+  div{width:300px;height:300px;background:#000;border-radius:100%;}
+  /*----1.大圆叠加小圆（两个div)----------*/
+	#r1{}
+	#r1 #r1-1{width:100px;height:100px;background:#fff;
+	position:relative;left:100px;top:100px;
+	}
+/*----2.大圆叠加小圆（一个div ，使用伪元素 ：befor ：after ---------*/
+	#r2{}
+	#r2:before{content:"";display:block;border-radius:100%;
+	width:100px;height:100px;background:#fff;
+	position:relative;left:100px;top:100px;
+	}
+/*----3.小圆大边框（一个div 设大边框 ---------*/
+	#r3{width:100px;height:100px;
+	background:#fff;
+	border:100px solid #000;
+	}
+/*----4.小圆外阴影（一个div 设外围阴影---------*/
+	#r4{width:100px;height:100px;
+	background:#fff;
+	box-shadow:0 0 0 100px #000;
+	margin:100px;
+	}
+/*----5.大圆内阴影（一个div 设内阴影---------*/
+	#r5{width:300px;height:300px;
+	background:#fff;
+	box-shadow:0 0 0 100px #000 inset;
+	}
+
+  </style>
+ </head>
+ <body>
+ 1<div id="r1" ><div id="r1-1"></div></div>
+ <hr>
+ 2<div id="r2" ></div>
+ <hr>
+ 3<div id="r3" ></div>
+  <hr>
+4<div id="r4" ></div>
+  <hr>
+5<div id="r5" ></div>
+ </body>
+</html>
